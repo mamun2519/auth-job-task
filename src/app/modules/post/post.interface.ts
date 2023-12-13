@@ -2,7 +2,8 @@ import { Model, ObjectId } from "mongoose";
 import { IUser } from "../auth/auth.interface";
 // Post interface
 export type IPost = {
-  user: IUser | ObjectId;
+  _id: string;
+  user: IUser | ObjectId | string;
   title: string;
   imgUrl: string;
   description: string;
