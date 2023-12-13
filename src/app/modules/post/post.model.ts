@@ -29,6 +29,8 @@ export const PostSchema = new Schema<IPost, PostModel>(
       type: Number,
       default: 0,
     },
+    likedUser: [],
+    commentedUser: [],
   },
   {
     timestamps: true,

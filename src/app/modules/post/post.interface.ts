@@ -8,6 +8,8 @@ export type IPost = {
   imgUrl: string;
   description: string;
   like: number;
+  likedUser: [{ user: IUser | ObjectId }];
+  commentedUser: [{ user: IUser | ObjectId; comment: string }];
 };
 export type PostModel = Model<IPost, Record<string, unknown>>;
 //Post Like Interface
