@@ -40,10 +40,52 @@ const deletePostFromDB = async (id: string): Promise<IPost | null> => {
   return post;
 };
 
+const postLikedIntoDB = async (
+  userId: string,
+  postId: string
+): Promise<{ message: string; post: IPost }> => {
+  const post = await Post.findById(postId);
+  if (!post) {
+    throw new API_Error(StatusCodes.NOT_FOUND, "Post Not Found");
+  }
+
+  const user = await User.findById(userId);
+  if (!user) {
+    throw new API_Error(StatusCodes.NOT_FOUND, "User Not Found");
+  }
+
+  console.log(post.likes.some((like) => like.user.equals(userId)));
+
+  if (post.likes.some((like) => like.user.equals(userId))) {
+    // return res.status(400).json({ message: "User already liked the product" });
+    const likeIndex = post.likes.findIndex((like) =>
+      like.user.equals(user._id)
+    );
+
+    post.like -= 1;
+    post.likes.splice(likeIndex, 1);
+    await post.save();
+    return {
+      message: "Post unlike",
+      post,
+    };
+  } else {
+    // Add like with user ID
+    post.like += 1;
+    post.likes.push({ user: userId });
+    await post.save();
+    return {
+      message: "Post liked",
+      post,
+    };
+  }
+};
+
 export const PostService = {
   insertPostIntoDb,
   allPostFromDB,
   postDetailsFromDB,
   updatePostIntoDb,
   deletePostFromDB,
+  postLikedIntoDB,
 };

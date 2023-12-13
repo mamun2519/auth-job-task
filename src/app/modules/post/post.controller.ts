@@ -52,10 +52,26 @@ const updatePostById = catchAsyncFn(async (req: Request, res: Response) => {
     data: result,
   });
 });
+
+const postLike = catchAsyncFn(async (req: Request, res: Response) => {
+  const user = req.user as JwtPayload;
+  const result = await PostService.postLikedIntoDB(
+    user.userId as string,
+    req.body.courseId
+  );
+  sendApiResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: "Liked  successfully",
+    data: result,
+  });
+});
+
 export const PostController = {
   postById,
   insertPost,
   getAllPost,
   deletePostById,
   updatePostById,
+  postLike,
 };

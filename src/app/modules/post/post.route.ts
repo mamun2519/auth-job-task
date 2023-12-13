@@ -7,4 +7,5 @@ router.delete("/:id", PostController.deletePostById);
 router.patch("/:id", PostController.updatePostById);
 router.post("/", PostController.insertPost);
 router.post("/", PostController.getAllPost);
+router.post("/like", PostController.postLike);
 export const PostRoute = router;
