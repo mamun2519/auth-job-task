@@ -5,7 +5,7 @@ using typeScript , express Js, Mongoose , JWT
 ## Sing Up
 
 - https://auth-six-red.vercel.app/api/auth/sing-up
-- formet
+- format
 - {
   "name": "Mamun",
   "email": "mamun123@gmail.com",
@@ -14,7 +14,7 @@ using typeScript , express Js, Mongoose , JWT
 ## Login
 
 - https://auth-six-red.vercel.app/api/auth/sing-in
-- formet
+- format
 - {
   "email": "mamun123@gmail.com",
   "password": "123456"}
@@ -22,7 +22,7 @@ using typeScript , express Js, Mongoose , JWT
 ## Reset Password
 
 - https://auth-six-red.vercel.app/api/auth/forget-password
-- formet
+- format
 - {
   "email": "mamun123@gmail.com",
   "newPassword": "123456"}
