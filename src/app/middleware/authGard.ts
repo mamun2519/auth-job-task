@@ -6,7 +6,7 @@ import { Secret } from "jsonwebtoken";
 import { jwtHelpers } from "../../utils/jwtToken";
 import config from "../../config";
 
-export const auth =
+export const AuthGard =
   () => async (req: Request, res: Response, next: NextFunction) => {
     try {
       console.log(req.headers.authorization);
