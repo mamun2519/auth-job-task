@@ -80,6 +80,17 @@ const postComment = catchAsyncFn(async (req: Request, res: Response) => {
   });
 });
 
+const myAllPost = catchAsyncFn(async (req: Request, res: Response) => {
+  const user = req.user as JwtPayload;
+  const result = await PostService.myAllPostFromDB(user.userId as string);
+  sendApiResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: "My All Post Fetch  successfully",
+    data: result,
+  });
+});
+
 export const PostController = {
   postById,
   insertPost,
@@ -88,4 +99,5 @@ export const PostController = {
   updatePostById,
   postLike,
   postComment,
+  myAllPost,
 };

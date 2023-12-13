@@ -98,6 +98,15 @@ const postCommentIntoBD = async (
   return post;
 };
 
+const myAllPostFromDB = async (userId: string): Promise<IPost[]> => {
+  const user = await User.findById(userId);
+  if (!user) {
+    throw new API_Error(StatusCodes.NOT_FOUND, "User Not Found");
+  }
+  const post = await Post.find({ user: userId });
+  return post;
+};
+
 export const PostService = {
   insertPostIntoDb,
   allPostFromDB,
@@ -106,4 +115,5 @@ export const PostService = {
   deletePostFromDB,
   postLikedIntoDB,
   postCommentIntoBD,
+  myAllPostFromDB,
 };
