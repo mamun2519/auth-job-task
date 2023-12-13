@@ -28,9 +28,10 @@ const postDetailsFromDB = async (id: string): Promise<IPost | null> => {
 };
 
 const updatePostIntoDb = async (
+  id: string,
   data: Partial<IPost>
 ): Promise<IPost | null> => {
-  const post = await Post.findByIdAndUpdate(data._id, data);
+  const post = await Post.findByIdAndUpdate(id, data);
   return post;
 };
 
