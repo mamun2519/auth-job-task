@@ -66,6 +66,19 @@ const postLike = catchAsyncFn(async (req: Request, res: Response) => {
     data: result,
   });
 });
+const postComment = catchAsyncFn(async (req: Request, res: Response) => {
+  const user = req.user as JwtPayload;
+  const result = await PostService.postCommentIntoBD(
+    user.userId as string,
+    req.body
+  );
+  sendApiResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: "Post Comment  successfully",
+    data: result,
+  });
+});
 
 export const PostController = {
   postById,
@@ -74,4 +87,5 @@ export const PostController = {
   deletePostById,
   updatePostById,
   postLike,
+  postComment,
 };

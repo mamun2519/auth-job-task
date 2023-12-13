@@ -1,7 +1,7 @@
 import { StatusCodes } from "http-status-codes";
 import API_Error from "../../../error/apiError";
 import { User } from "../auth/auth.model";
-import { IPost } from "./post.interface";
+import { IComment, IPost } from "./post.interface";
 import { Post } from "./post.model";
 
 const insertPostIntoDb = async (
@@ -57,7 +57,6 @@ const postLikedIntoDB = async (
   console.log(post.likes.some((like) => like.user.equals(userId)));
 
   if (post.likes.some((like) => like.user.equals(userId))) {
-    // return res.status(400).json({ message: "User already liked the product" });
     const likeIndex = post.likes.findIndex((like) =>
       like.user.equals(user._id)
     );
@@ -81,6 +80,24 @@ const postLikedIntoDB = async (
   }
 };
 
+const postCommentIntoBD = async (
+  userId: string,
+  comment: IComment
+): Promise<IPost | null> => {
+  const post = await Post.findById(comment.postId);
+  if (!post) {
+    throw new API_Error(StatusCodes.NOT_FOUND, "Post Not Found");
+  }
+
+  const user = await User.findById(userId);
+  if (!user) {
+    throw new API_Error(StatusCodes.NOT_FOUND, "User Not Found");
+  }
+  post.comments.push({ user: userId, comment: comment.comment });
+  await post.save();
+  return post;
+};
+
 export const PostService = {
   insertPostIntoDb,
   allPostFromDB,
@@ -88,4 +105,5 @@ export const PostService = {
   updatePostIntoDb,
   deletePostFromDB,
   postLikedIntoDB,
+  postCommentIntoBD,
 };

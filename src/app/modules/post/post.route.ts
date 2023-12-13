@@ -8,4 +8,5 @@ router.patch("/:id", PostController.updatePostById);
 router.post("/", PostController.insertPost);
 router.post("/", PostController.getAllPost);
 router.post("/like", PostController.postLike);
+router.post("/comment", PostController.postComment);
 export const PostRoute = router;

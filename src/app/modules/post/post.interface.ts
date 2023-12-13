@@ -17,3 +17,8 @@ export type IPost = {
   }[];
 };
 export type PostModel = Model<IPost, Record<string, unknown>>;
+
+export type IComment = {
+  postId: string;
+  comment: string;
+};
