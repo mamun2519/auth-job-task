@@ -57,7 +57,7 @@ const postLike = catchAsyncFn(async (req: Request, res: Response) => {
   const user = req.user as JwtPayload;
   const result = await PostService.postLikedIntoDB(
     user.userId as string,
-    req.body.courseId
+    req.body.postId
   );
   sendApiResponse(res, {
     statusCode: StatusCodes.OK,

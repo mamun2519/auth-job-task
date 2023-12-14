@@ -40,9 +40,9 @@ async function database() {
 
 database();
 
-process.on("SIGTERM", () => {
-  console.log("SIGTERM Is Received");
-  if (server) {
-    server.close();
-  }
-});
+// process.on("SIGTERM", () => {
+//   console.log("SIGTERM Is Received");
+//   if (server) {
+//     server.close();
+//   }
+// });

@@ -31,12 +31,13 @@ const updatePostIntoDb = async (
   id: string,
   data: Partial<IPost>
 ): Promise<IPost | null> => {
-  const post = await Post.findByIdAndUpdate(id, data);
+  const post = await Post.findByIdAndUpdate(id, data, { new: true });
   return post;
 };
 
-const deletePostFromDB = async (id: string): Promise<IPost | null> => {
-  const post = await Post.findOneAndUpdate({ _id: id });
+const deletePostFromDB = async (id: string): Promise<IPost> => {
+  const post = await Post.findByIdAndDelete(id);
+  //@ts-ignore
   return post;
 };
 

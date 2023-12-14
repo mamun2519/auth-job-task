@@ -4,6 +4,11 @@ import { IPost, PostModel } from "./post.interface";
 // Post Schema
 export const PostSchema = new Schema<IPost, PostModel>(
   {
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: [true, " User Id Is Required"],
+    },
     title: {
       type: String,
       required: [true, " Title Is Required"],
